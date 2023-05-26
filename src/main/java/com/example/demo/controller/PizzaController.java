@@ -20,7 +20,7 @@ public class PizzaController {
 	private PizzaService pizzaService;
 	
 	@GetMapping("/")
-	public String getHome(Model model) {
+	public String index(Model model) {
 		
 		List<Pizza> pizze = pizzaService.findAll();
 		
@@ -31,7 +31,7 @@ public class PizzaController {
 	
 	
 	@GetMapping("/pizza/{id}")
-	public String getPizza(
+	public String show(
 			Model model,
 			@PathVariable("id") int id
 	) {
