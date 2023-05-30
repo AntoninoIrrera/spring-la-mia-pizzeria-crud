@@ -34,6 +34,12 @@
         <td>
       		<a class="btn btn-primary" th:href="@{/pizza/{id}(id=${pizza.id})}">show</a>
     	</td>
+    	<td>
+      		<a class="btn btn-primary" th:href="@{/pizza/update/{id}(id=${pizza.id})}">update</a>
+    	</td>
+    	<td>
+      		<a class="btn btn-primary" th:href="@{/pizza/delete/{id}(id=${pizza.id})}">delete</a>
+    	</td>
     </tr>
   </tbody>
 </table>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="" method="post">
+		<label>nome:</label>
+		<input type="text" name="nome" th:value="${pizza.nome}">
+		<label>descrizione:</label>
+		<textarea rows="10" cols="10" name="descrizione" th:text="${pizza.descrizione}"></textarea>
+		<label>foroUrl:</label>
+		<textarea rows="10" cols="10" name="fotoUrl" th:text="${pizza.fotoUrl}"></textarea>
+		<label>prezzo:</label>
+		<input type="number" name="prezzo" th:value="${pizza.prezzo}">
+		<button type="submit">modifica</button>
+	</form>
+</body>
+</html>
