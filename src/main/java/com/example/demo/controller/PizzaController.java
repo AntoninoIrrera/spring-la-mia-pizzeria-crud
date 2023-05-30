@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.pojo.Pizza;
 import com.example.demo.service.PizzaService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class PizzaController {
@@ -61,13 +64,28 @@ public class PizzaController {
 	
 	
 	@GetMapping("/pizza/create")
-	public String createPizza() {
+	public String createPizza(Model model) {
+		
+		model.addAttribute("pizza",new Pizza());
 		
 		return "createForm";
 	}
 	
 	@PostMapping("/pizza/create")
-	public String storePizza(@ModelAttribute Pizza pizza) {
+	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) {
+			
+//			for(ObjectError err : bindingResult.getAllErrors()) {
+//				System.out.println(err.getDefaultMessage());
+//			}
+			
+			model.addAttribute("pizza",pizza);
+			model.addAttribute("errori",bindingResult);
+			
+			return "createForm";
+		}
+		
 		
 		pizzaService.save(pizza);
 		
@@ -102,9 +120,27 @@ public class PizzaController {
 	}
 	@PostMapping("/pizza/update/{id}")
 	public String updatePizza(
-			@PathVariable int id,
-			@ModelAttribute Pizza pizza
+			  @Valid
+		      @ModelAttribute Pizza pizza,
+		      BindingResult bindingResult,
+		      @PathVariable int id,
+		      Model model
+			
+			
 		) {
+		
+		
+		if(bindingResult.hasErrors()) {
+			
+			
+			
+			model.addAttribute("pizza",pizza);
+			model.addAttribute("errori",bindingResult);
+			
+			return "updateForm";
+		}
+		
+		
 		
 		pizzaService.save(pizza);
 		

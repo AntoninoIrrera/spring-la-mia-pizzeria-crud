@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Pizza {
@@ -13,12 +17,21 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
+	@NotBlank(message = "il nome non puo essere vuoto")
+	@Size(min = 3,message = "almeno 3 caratteri")
 	private String nome;
+	
+	@NotBlank(message = "il messaggio non puo essere vuoto")
+	@Size(min = 3,message = "almeno 3 caratteri")
 	@Column(columnDefinition = "TEXT")
 	private String descrizione;
+	
+	@NotBlank(message = "la foto non puo essere vuoto")
 	@Column(columnDefinition = "TEXT")
 	private String fotoUrl;
+	
+	@Min(value = 1,message = "il prezzo non puo essere minore di 1")
+	@NotNull(message = "il prezzo non puo essere vuoto")
 	private float prezzo;
 	
 	public Pizza() {}
